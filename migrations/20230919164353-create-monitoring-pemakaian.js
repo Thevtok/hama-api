@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('PerhitunganIndeks', {
+    await queryInterface.createTable('MonitoringPemakaians', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -15,22 +15,31 @@ module.exports = {
       no_order: {
         type: Sequelize.STRING
       },
-      lokasi: {
+      satuan: {
         type: Sequelize.STRING
       },
-      jenis_hama: {
+      satuanb: {
         type: Sequelize.STRING
       },
-      indeks_populasi: {
+      ins: {
         type: Sequelize.INTEGER
       },
-      jumlah: {
+      out: {
         type: Sequelize.INTEGER
+      },
+      stok_akhir: {
+        type: Sequelize.INTEGER
+      },
+      stok_awal: {
+        type: Sequelize.INTEGER
+      },
+      merk: {
+        type: Sequelize.STRING
       },
       tanggal: {
-        type: Sequelize.DATE
+        type: Sequelize.STRING
       },
-      status: {
+      bahan_aktif: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -44,6 +53,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('PerhitunganIndeks');
+    await queryInterface.dropTable('MonitoringPemakaians');
   }
 };
