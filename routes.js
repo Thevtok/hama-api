@@ -36,12 +36,14 @@ router.get('/daily/getall/:no_order/:tanggal',authenticateToken, dailyController
 // indeks
 router.post('/indeks/add/:no_order',authenticateToken, indeksController.addIndeks);
 router.get('/indeks/getall/:no_order',authenticateToken, indeksController.getAllIndeks);
+router.get('/indeks/getall/:no_order/:tanggal',authenticateToken, indeksController.getAllIndeksDate);
 // inspeksi
 router.post('/inspeksi/add/:no_order',authenticateToken, inpeksiController.addInspeksi);
 router.get('/inspeksi/getall/:no_order',authenticateToken, inpeksiController.getAllInspeksi);
 // pemakaian
 router.post('/pemakaian/add/:no_order',authenticateToken, pemakaianController.addPemakaian);
 router.get('/pemakaian/getall/:no_order',authenticateToken, pemakaianController.getAllPemakaian);
+router.get('/pemakaian/getall/:no_order/:tanggal',authenticateToken, pemakaianController.getAllPemakaianDate);
 // auth
 router.post('/login', userController.loginUser);
 

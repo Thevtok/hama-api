@@ -17,11 +17,11 @@ const storage = multer.diskStorage({
   },
 });
 
-// Inisialisasi multer dengan konfigurasi penyimpanan
+
 const upload = multer({ storage });
 
-// Middleware untuk menangani unggahan file
-exports.uploadFile = upload.single('bukti_foto'); // 'bukti_foto' sesuaikan dengan nama field form
+
+uploadFile = upload.single('bukti_foto'); 
 
 exports.addDaily = async (req, res) => {
   try {
@@ -42,9 +42,7 @@ exports.addDaily = async (req, res) => {
        
       } = req.body;
 
-      const { filename } = req.file; // Nama file yang diunggah
-
-      // Cari nomor order yang sesuai
+      const { filename } = req.file; 
       const existingOrder = await Order.findOne({ where: { no_order } });
 
       if (!existingOrder) {

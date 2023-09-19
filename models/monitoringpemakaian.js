@@ -20,10 +20,10 @@ module.exports = (sequelize, DataTypes) => {
     satuanb: DataTypes.STRING,
     ins: DataTypes.INTEGER,
     out: DataTypes.INTEGER,
-    satuan_akhir: DataTypes.STRING,
+    stok_akhir: DataTypes.INTEGER,
     stok_awal: DataTypes.INTEGER,
     merk: DataTypes.STRING,
-    tanggal: DataTypes.DATE,
+    tanggal: DataTypes.STRING,
     bahan_aktif: DataTypes.STRING
   }, {
     sequelize,

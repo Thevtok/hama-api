@@ -32,7 +32,7 @@ exports.loginUser = async (req, res) => {
 
     // Jika email dan password cocok, buat token JWT
     const token = jwt.sign({ userId: user.id, email: user.email }, 'secret_key', {
-      expiresIn: '1h', // Durasi token berlaku
+      expiresIn: '1y', 
     });
 
     // Kirim token sebagai respons

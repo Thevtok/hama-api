@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     jenis_hama: DataTypes.STRING,
     indeks_populasi: DataTypes.INTEGER,
     jumlah: DataTypes.INTEGER,
-    tanggal: DataTypes.DATE,
+    tanggal: DataTypes.STRING,
     status: DataTypes.STRING
   }, {
     sequelize,

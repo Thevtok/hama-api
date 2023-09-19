@@ -1,5 +1,24 @@
 const { Order, InspeksiAksesHama } = require("../models");
-const { uploadFile } = require("./dailyController");
+
+const multer = require('multer');
+const path = require('path');
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/'); // Simpan file di direktori "uploads/"
+  },
+  filename: (req, file, cb) => {
+    const extname = path.extname(file.originalname);
+    const filename = `${Date.now()}${extname}`;
+    cb(null, filename);
+  },
+});
+
+
+const upload = multer({ storage });
+
+
+uploadFile = upload.single('bukti_foto'); 
 
 exports.addInspeksi = async (req, res) => {
   try {

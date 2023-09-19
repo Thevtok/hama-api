@@ -40,3 +40,23 @@ exports.addPemakaian = async (req, res) => {
     }
   };
   
+
+  
+  exports.getAllPemakaianDate = async (req, res) => {
+    try {
+      const { no_order,tanggal } = req.params;
+  
+      // Cari semua data Pemakaian berdasarkan nomor order
+      const PemakaianList = await MonitoringPemakaian.findAll({ where: { no_order,tanggal } });
+  
+      if (!PemakaianList || PemakaianList.length === 0) {
+        return res.status(404).json({ error: 'Tidak ada data Pemakaian untuk nomor order ini' });
+      }
+  
+      res.status(200).json(PemakaianList);
+    } catch (error) {
+      console.error('Gagal mendapatkan data Pemakaian:', error);
+      res.status(500).json({ error: 'Gagal mendapatkan data Pemakaian' });
+    }
+  };
+  

@@ -40,3 +40,22 @@ exports.addIndeks = async (req, res) => {
     }
   };
   
+
+  
+  exports.getAllIndeksDate = async (req, res) => {
+    try {
+      const { no_order,tanggal } = req.params;
+  
+      // Cari semua data Indeks berdasarkan nomor order
+      const IndeksList = await PerhitunganIndeks.findAll({ where: { no_order,tanggal } });
+  
+      if (!IndeksList || IndeksList.length === 0) {
+        return res.status(404).json({ error: 'Tidak ada data Indeks untuk nomor order ini' });
+      }
+  
+      res.status(200).json(IndeksList);
+    } catch (error) {
+      console.error('Gagal mendapatkan data Indeks:', error);
+      res.status(500).json({ error: 'Gagal mendapatkan data Indeks' });
+    }
+  };
