@@ -21,7 +21,7 @@ module.exports = {
       bukti_foto: {
         type: Sequelize.STRING
       },
-      Rekomendasi: {
+      rekomendasi: {
         type: Sequelize.STRING
       },
       tanggal: {

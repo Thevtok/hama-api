@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     no_order: DataTypes.STRING,
     lokasi: DataTypes.STRING,
     bukti_foto: DataTypes.STRING,
-    Rekomendasi: DataTypes.STRING,
+    rekomendasi: DataTypes.STRING,
     tanggal: DataTypes.STRING,
     keterangan: DataTypes.STRING
   }, {
