@@ -11,11 +11,10 @@ const storage = multer.diskStorage({
     cb(null, 'uploads/'); // Simpan file di direktori "uploads/"
   },
   filename: (req, file, cb) => {
-    const extname = path.extname(file.originalname);
-    const filename = `${Date.now()}${extname}`;
-    cb(null, filename);
+    cb(null, file.originalname); // Gunakan nama asli file
   },
 });
+
 
 
 const upload = multer({ storage });
@@ -39,7 +38,6 @@ exports.addDaily = async (req, res) => {
         jumlah,
         tanggal,
         keterangan,
-       
       } = req.body;
 
       const { filename } = req.file; 
@@ -47,6 +45,22 @@ exports.addDaily = async (req, res) => {
 
       if (!existingOrder) {
         return res.status(404).json({ error: 'Nomor order tidak ditemukan' });
+      }
+
+      // Cek apakah data dengan nomor order dan tanggal yang sama sudah ada
+      const existingDaily = await DailyActivity.findOne({
+        where: {
+       
+          no_order,
+          name,
+          tanggal
+      
+        },
+      });
+
+      if (existingDaily) {
+        return res.status(409).json({ error: 'Data Daily dengan nama dan order yang sama sudah ada' });
+      
       }
 
       // Tambahkan data Daily ke dalam tabel
@@ -69,6 +83,7 @@ exports.addDaily = async (req, res) => {
     res.status(500).json({ error: 'Gagal menambahkan Daily' });
   }
 };
+
   
   exports.getAllDaily = async (req, res) => {
     try {

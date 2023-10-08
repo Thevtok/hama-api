@@ -11,6 +11,13 @@ exports.addIndeks = async (req, res) => {
       if (!existingOrder) {
         return res.status(404).json({ error: 'Nomor order tidak ditemukan' });
       }
+      const existingPeralatan = await PerhitunganIndeks.findOne({
+        where: { no_order, name },
+      });
+  
+      if (existingPeralatan) {
+        return res.status(409).json({ error: 'Data index sudah ada' });
+      }
   
       // Tambahkan data Indeks ke dalam tabel
       const newIndeks = await PerhitunganIndeks.create({ name, lokasi, jenis_hama, indeks_populasi, jumlah,tanggal,status,no_order });

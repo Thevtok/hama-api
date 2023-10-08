@@ -8,9 +8,7 @@ const storage = multer.diskStorage({
     cb(null, 'uploads/'); // Simpan file di direktori "uploads/"
   },
   filename: (req, file, cb) => {
-    const extname = path.extname(file.originalname);
-    const filename = `${Date.now()}${extname}`;
-    cb(null, filename);
+    cb(null, file.originalname); // Gunakan nama asli file
   },
 });
 
@@ -44,6 +42,20 @@ exports.addInspeksi = async (req, res) => {
 
       if (!existingOrder) {
         return res.status(404).json({ error: "Nomor order tidak ditemukan" });
+      }
+      const existingDaily = await InspeksiAksesHama.findOne({
+        where: {
+       
+          no_order,
+          name,
+          tanggal
+      
+        },
+      });
+
+      if (existingDaily) {
+        return res.status(409).json({ error: 'Data Inspeksi dengan nama dan order yang sama sudah ada' });
+      
       }
 
       // Tambahkan data Daily ke dalam tabel

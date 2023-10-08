@@ -11,6 +11,14 @@ exports.addPemakaian = async (req, res) => {
       if (!existingOrder) {
         return res.status(404).json({ error: 'Nomor order tidak ditemukan' });
       }
+
+      const existingPeralatan = await MonitoringPemakaian.findOne({
+        where: { no_order, name },
+      });
+  
+      if (existingPeralatan) {
+        return res.status(409).json({ error: 'Data pemakaian sudah ada' });
+      }
   
       // Tambahkan data Pemakaian ke dalam tabel
       const newPemakaian = await MonitoringPemakaian.create({ name, bahan_aktif, merk, stok_awal, satuan,tanggal,ins,no_order,out,stok_akhir,satuanb });
